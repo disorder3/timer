@@ -3,34 +3,34 @@ let resetBtn = document.getElementById("reset");
 let stopBtn = document.getElementById("stop");
 let startBtn = document.getElementById("start");
 
-let heures = 0;
+let hours = 0;
 let minutes = 0;
 let secondes = 0;
 
 let timeout;
 
-let estArrete = true;
+let isStop = true;
 
 const start = () => {
-  if (estArrete) {
-    estArrete = false;
-    defilerTemps();
+  if (isStop) {
+    isStop = false;
+    swiftTime();
   }
 };
 
 const stopC = () => {
-  if (!estArrete) {
-    estArrete = true;
+  if (!isStop) {
+    isStop = true;
     clearTimeout(timeout);
   }
 };
 
-const defilerTemps = () => {
-  if (estArrete) return;
+const swiftTime = () => {
+  if (isStop) return;
 
   secondes = parseInt(secondes);
   minutes = parseInt(minutes);
-  heures = parseInt(heures);
+  hours = parseInt(hours);
 
   secondes++;
 
@@ -40,7 +40,7 @@ const defilerTemps = () => {
   }
 
   if (minutes == 60) {
-    heures++;
+    hours++;
     minutes = 0;
   }
 
@@ -53,19 +53,19 @@ const defilerTemps = () => {
     minutes = "0" + minutes;
   }
 
-  if (heures < 10) {
-    heures = "0" + heures;
+  if (hours < 10) {
+    hours = "0" + hours;
   }
 
-  chrono.textContent = `${heures}:${minutes}:${secondes}`;
+  chrono.textContent = `${hours}:${minutes}:${secondes}`;
 
-  timeout = setTimeout(defilerTemps, 1000);
+  timeout = setTimeout(swiftTime, 1000);
 };
 
 const reset = () => {
   chrono.textContent = "00:00:00";
-  estArrete = true;
-  heures = 0;
+  isStop = true;
+  hours = 0;
   minutes = 0;
   secondes = 0;
   clearTimeout(timeout);
